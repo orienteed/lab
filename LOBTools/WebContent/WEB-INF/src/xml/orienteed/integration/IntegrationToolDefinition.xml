@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2015, 2017 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+-->
+
+<Definitions>
+	<BusinessObjectEditor definitionName="cmc/orienteed/integration/IntegrationTool" explorerFilterTypes="Jenkins" 
+			displayName="Integration Tool" showStorePreview="false" showStoreSelection="false" showUtilitiesView="false">
+		<ObjectTypeFilter displayName="Jenkins" filterType="Jenkins" objectTypes="JenkinsTop"/>
+
+		<TopObjectDefinition>
+			<Xml name="template">
+				<object objectType="JenkinsTop"/>
+			</Xml>
+		</TopObjectDefinition>
+		
+		<OrganizationalObjectDefinition displayName="Jenkins" objectType="JenkinsTop">
+			<GetChildrenService url="/cmc/integration/jenkins/jobList">
+				<ServiceParam name="storeId"/>
+			</GetChildrenService>
+			
+			<NavigationListDefinition definitionName="cmc/orienteed/integration/JenkinsChildList" displayName="Jenkins Job List" 
+					listDefinition="cmc/orienteed/integration/JenkinsListEditor" listTitle="Job List"/>
+		</OrganizationalObjectDefinition>
+
+		<PrimaryObjectDefinition baseDefinition="cmc/orienteed/integration/JenkinsPrimaryObjectDefinition" creatable="true"/>
+	</BusinessObjectEditor>
+	
+	<PrimaryObjectDefinition definitionName="cmc/orienteed/integration/JenkinsPrimaryObjectDefinition" objectType="Jenkins"
+			 idProperty="integrationId" displayNameProperty="jenkinsName"
+			 propertiesDefinition="cmc/orienteed/integration/JenkinsProperties" initializeObjectStoreId="false">
+		<RefreshService url="/cmc/integration/jenkins/refresh">
+			<ServiceParam name="jobName" propertyName="jobName"/>
+			<ServiceParam name="storeId"/>			 
+		</RefreshService>
+		
+		<CustomService url="/cmc/integration/jenkins/build" displayName="Build job" toolbarIcon="jenkinsBuild">
+			<ServiceParam name="jobName" propertyName="jobName"/>
+			<ServiceParam name="storeId"/>			 		 
+		</CustomService>
+	</PrimaryObjectDefinition>
+	
+	<Image name="jenkinsBuild" src="/images/orienteed/integration/resources/jenkins_build.png"/>
+		
+	<ChildListEditor definitionName="cmc/orienteed/integration/JenkinsListEditor" 
+			listDefinition="cmc/orienteed/integration/JenkinsGrid" objectTypes="Jenkins"/>
+
+	<ObjectGrid definitionName="cmc/orienteed/integration/JenkinsGrid">
+		<GridText editable="false" name="color" propertyName="color" text="Color" width="80"/>
+		<GridText editable="false" name="jobName" propertyName="jobName" text="Job Name" width="350"/>
+		<GridText editable="false" name="lastBuild" propertyName="lastBuild" text="Last Build" width="350"/>
+		<GridText editable="false" name="lastDuration" propertyName="lastDuration" text="Last Duration" width="350"/>
+		<GridText editable="false" name="lastResult" propertyName="lastResult" text="Last Result" width="350"/>
+	</ObjectGrid>
+	
+	<ObjectProperties definitionName="cmc/orienteed/integration/JenkinsProperties">
+
+		<PropertyPane>
+			<PropertyGroup groupTitle="General Job Properties" open="true">
+				<PropertyViewLongText promptText="Color" propertyName="color" required="true"/>
+				<PropertyViewLongText promptText="Job Name" propertyName="jobName" required="true"/>
+				<PropertyViewLongText promptText="URL" propertyName="integrationId" required="true"/>
+			</PropertyGroup>
+
+			<PropertyGroup groupTitle="Last Build Information" open="false">
+				<PropertyViewLongText promptText="Last Build" propertyName="lastBuild" required="false"/>
+				<PropertyViewLongText promptText="Last Duration" propertyName="lastDuration" required="false"/>
+				<PropertyViewLongText promptText="Last Result" propertyName="lastResult" required="false"/>
+			</PropertyGroup>
+			
+			<PropertyGroup groupTitle="Last Build Console Log">
+				<PropertyViewLongText promptText="Last Console Log" propertyName="lastConsoleLog" required="false"/>
+			</PropertyGroup>
+		</PropertyPane>
+			
+	</ObjectProperties>
+</Definitions>

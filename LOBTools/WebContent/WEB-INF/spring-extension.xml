@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2015 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="/integration/jenkins/jobList"
+		class="com.ibm.commerce.foundation.internal.client.lobtools.controllers.ControllerCommandController">
+		<property name="commandInterface"
+			value="com.orienteed.commerce.integration.commands.IntegrationJenkinsCmd" />
+		<property name="defaultParameters">
+			<props>
+				<prop key="function">joblist</prop>
+			</props>
+		</property>
+
+		<property name="contextParameters">
+			<props>
+				<prop key="storeId">storeId</prop>
+			</props>
+		</property>
+
+		<property name="successView"
+			value="/jsp/orienteed/integration/JenkinsJobList.jsp" />
+	</bean>
+
+	<bean id="/integration/jenkins/refresh"
+		class="com.ibm.commerce.foundation.internal.client.lobtools.controllers.ControllerCommandController">
+		<property name="commandInterface"
+			value="com.orienteed.commerce.integration.commands.IntegrationJenkinsCmd" />
+		<property name="defaultParameters">
+			<props>
+				<prop key="function">refresh</prop>
+			</props>
+		</property>
+
+		<property name="contextParameters">
+			<props>
+				<prop key="storeId">storeId</prop>
+			</props>
+		</property>
+
+		<property name="successView"
+			value="/jsp/orienteed/integration/JenkinsJobRefresh.jsp" />
+	</bean>
+
+	<bean id="/integration/jenkins/build"
+		class="com.ibm.commerce.foundation.internal.client.lobtools.controllers.ControllerCommandController">
+		<property name="commandInterface"
+			value="com.orienteed.commerce.integration.commands.IntegrationJenkinsCmd" />
+		<property name="defaultParameters">
+			<props>
+				<prop key="function">build</prop>
+			</props>
+		</property>
+		<property name="contextParameters">
+			<props>
+				<prop key="storeId">storeId</prop>
+			</props>
+		</property>
+		<property name="successView"
+			value="/jsp/orienteed/integration/JenkinsBuildJob.jsp" />
+	</bean>
+
+</beans>
