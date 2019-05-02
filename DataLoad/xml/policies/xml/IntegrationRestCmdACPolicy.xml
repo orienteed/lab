@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no" ?> 
+<!DOCTYPE Policies SYSTEM "../dtd/accesscontrolpolicies.dtd">
+
+<Policies>
+
+	<Action Name="Execute" CommandName="ExecuteCommand" />
+
+	<ResourceCategory Name="com.orienteed.commerce.integration.commands.IntegrationJenkinsCmdResourceCategory"
+			ResourceBeanClass="com.orienteed.commerce.integration.commands.IntegrationJenkinsCmd">
+		<ResourceAction Name="ExecuteCommand" />
+	</ResourceCategory>
+	
+	<ResourceGroup Name="AllSiteUserCmdResourceGroup"  OwnerID="RootOrganization">
+		<ResourceGroupResource Name="com.orienteed.commerce.integration.commands.IntegrationJenkinsCmdResourceCategory" />
+		<ResourceGroupResource Name="com.orienteed.commerce.integration.commands.RunJenkinsJobCmdResourceCategory" />
+	</ResourceGroup>
+	
+</Policies>

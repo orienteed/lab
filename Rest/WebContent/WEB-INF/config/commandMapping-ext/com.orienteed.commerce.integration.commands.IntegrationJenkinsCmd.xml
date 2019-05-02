@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<command>
+    <profiles>
+        <profile name="Orienteed_Integration">
+            <inputs>
+                <input inputName="user" methodName="setUser"/>
+                <input inputName="password" methodName="setPassword"/>
+                <input inputName="hostName" methodName="setHostName"/>
+                <input inputName="port" methodName="setPort"/>
+                <input inputName="endpoint" methodName="setEndpoint"/>
+                <input inputName="function" methodName="setFunction"/>
+                <input inputName="jobName" methodName="setJobName"/>
+            </inputs>
+            <outputs>
+                <output methodName="getResponse" outputName="response"/>
+            </outputs>
+        </profile>
+    </profiles>
+</command>
